@@ -60,9 +60,9 @@ bar: world
 and the ruby
 
 ```ruby
-Metatext.configure(
+Metatext.configure \
   dir: File.expand_path("examples", __FILE__),
-  ext: 'txt.erb')) # note erb extension
+  ext: 'txt.erb' # note erb extension
 
 Metatext.parse :hello_word, sounds: ["bleep", "bloop"] do |meta, content|
   puts meta.inspect # => #<OpenStruct foo="hello", bar="world">
