@@ -1,4 +1,4 @@
-# metatext
+## metatext
 
 a lightweight jekyll-inspired metadata processor
 
