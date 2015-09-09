@@ -87,4 +87,4 @@ Note: any text processor will work **as long as it implements a `render` method*
 ### why?
 
 This library was originally written for no-fuss, plaintext email templates. It was developed
-for and used in production environments at [CD Baby](http://www.cdbaby.com/).
+for and currently used in production environments at [CD Baby](http://www.cdbaby.com/).
