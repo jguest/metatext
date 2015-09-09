@@ -13,13 +13,13 @@ a lightweight jekyll-inspired metadata processor
 
 Install the gem with by running `gem install metatext` or include it in your Gemfile.
 
-* configure metatext
+configure metatext
 
 ```ruby
 Metatext.configure(dir: File.expand_path("examples", __FILE__), ext: 'txt')
 ```
 
-* hello_word.txt
+hello_word.txt
 
 ```
 ---
@@ -29,7 +29,7 @@ bar: world
 hello world
 ```
 
-* use it
+use it
 
 ```ruby
 Metatext.parse :hello_word do |meta, content|
