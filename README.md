@@ -12,23 +12,22 @@ a lightweight jekyll-inspired metadata processor
 ### getting started
 
 Install the gem with by running `gem install metatext` or include it in your Gemfile.
-This example assumes there is a directory called `examples` in the root of your project
-with a file named `hello_world.txt`. Everything in-between the triple ticks will be
-parsed as metadata, while the content underneath can be passed back raw, parsed with
-erb (if erb extension given) or further processed using something like redcarpet for
-markdown.
 
-`cat examples/hello_word.txt`
+`cat examples/hello_world.txt`
 
 ```
 ---
 foo: hello
 bar: world
 ---
-hello world
+this is some plain ol' text
 ```
 
-and the ruby
+Everything in-between the triple ticks will be parsed as metadata, while the
+content underneath can be passed back raw, parsed with erb (if erb extension given)
+or further processed using something like redcarpet for markdown.
+
+Here's the ruby:
 
 ```ruby
 # configure
@@ -37,7 +36,7 @@ Metatext.configure(dir: File.expand_path("examples", __FILE__), ext: 'txt')
 # use it
 Metatext.parse :hello_word do |meta, content|
   puts meta.inspect # => #<OpenStruct foo="hello", bar="world">
-  puts content      # => "hello world"
+  puts content      # => "this is some plain ol' text"
 end
 ```
 
@@ -46,7 +45,7 @@ end
 If you set your extension to anything ending with `.erb`, e.g. `txt.erb`, the
 text will be processed as erb, also allowing you to pass in locals.
 
-`cat examples/hello_word.txt`
+`cat examples/hello_word.txt.erb`
 
 ```
 ---
@@ -61,6 +60,10 @@ bar: world
 and the ruby
 
 ```ruby
+Metatext.configure(
+  dir: File.expand_path("examples", __FILE__),
+  ext: 'txt.erb')) # note erb extension
+
 Metatext.parse :hello_word, sounds: ["bleep", "bloop"] do |meta, content|
   puts meta.inspect # => #<OpenStruct foo="hello", bar="world">
   puts content      # => "hello world"
