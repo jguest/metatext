@@ -2,6 +2,9 @@
 
 a lightweight jekyll-inspired metadata parser
 
+![Gem Version](https://badge.fury.io/rb/metatext.svg)
+![Build Status](https://api.travis-ci.org/jguest/metatext.svg?branch=master)
+
 ### what it do
 
 * parses yaml at the top of any file, jekyll style
