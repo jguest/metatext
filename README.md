@@ -57,9 +57,6 @@ Metatext.parse raw do |meta, content|
 end
 ```
 
-* there's no need to configure metatext in this case unless you'd like a text processor (see "with markdown")
-* as of the current version, raw strings will be parsed as erb if any `<% %>` delimiters are found.
-
 ### erb on demand
 
 If you set your extension to anything ending with `.erb`, e.g. `txt.erb`, the
