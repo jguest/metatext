@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'metatext'
-  s.description = "a lightweight jekyll-style metadata parser\nhttps://github.com/jguest/metatext"
+  s.description = "a lightweight jekyll-style metadata parser"
   s.version     = '0.0.2'
   s.date        = '2015-09-08'
   s.summary     = "metatext"
