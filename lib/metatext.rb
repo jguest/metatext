@@ -57,7 +57,7 @@ class Metatext
       # run the file contents through erb
       # @param with - the variables you want available in the file
 
-      def erbify(raw, with:)
+      def erbify(raw, with: {})
         namespace = OpenStruct.new with
         ERB.new(raw).result namespace.instance_eval { binding }
       end
