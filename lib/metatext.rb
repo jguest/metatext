@@ -19,8 +19,9 @@ class Metatext
 
     # @param dir - path to metatext files
     # @param ext - the file extention (e.g. 'txt', 'md', 'txt.erb')
+    # @param processor - any object that responds to `#render`
 
-    def configure(dir:, ext:, processor: nil)
+    def configure(dir: nil, ext: nil, processor: nil)
       @dir = dir
       @ext = ext
       @pro = processor
@@ -29,9 +30,9 @@ class Metatext
     # main driver method for metatext parsing
     # @return self
 
-    def parse(file, locals={})
-      raw = read file
-      raw = erbify raw, with: locals if @ext.include? 'erb'
+    def parse(to_parse, locals={})
+      raw = read(to_parse) || to_parse
+      raw = erbify raw, with: locals if parse_as_erb? raw
       yield metadata(raw), render(raw)
     end
 
@@ -40,8 +41,17 @@ class Metatext
       # opens and reads the metatext file
       # @param file
 
-      def read(file)
-        File.read "#{@dir}/#{file.to_s}.#{@ext}"
+      def read(to_parse)
+        if to_parse.is_a? Symbol
+          File.read "#{@dir}/#{to_parse.to_s}.#{@ext}"
+        end
+      end
+
+      # run raw content through erb?
+      # @param raw
+
+      def parse_as_erb?(raw)
+        (@ext && @ext.include?("erb")) || (@ext.nil? && raw.include?("<%"))
       end
 
       # run the file contents through erb

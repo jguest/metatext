@@ -21,6 +21,33 @@ class MetaTextTest < Minitest::Test
     end
   end
 
+  def test_string_with_dash_delimiters
+    use_default_metatext!
+    raw = %{
+---
+name: John Guest
+---
+please parse me!
+}
+
+    Metatext.parse raw do |meta, content|
+      assert_equal meta.name, "John Guest"
+      assert_equal content.strip, "please parse me!"
+    end
+
+    raw = %{
+---
+name: John Guest
+---
+here's my github profile: <%= link %>
+}
+
+    Metatext.parse raw, link: "https://github.com/jguest" do |meta, content|
+      assert_equal meta.name, "John Guest"
+      assert_equal content.strip, "here's my github profile: https://github.com/jguest"
+    end
+  end
+
   def test_erb_with_dash_delimiters
     use_txt_erb_metatext!
     Metatext.parse :erb_with_dash_delimiters, foo: "iam", bar: "thecowgod" \
@@ -41,6 +68,10 @@ class MetaTextTest < Minitest::Test
   end
 
   private
+
+    def use_default_metatext!
+      Metatext.configure dir: nil, ext: nil
+    end
 
     def use_txt_metatext!
       Metatext.configure \

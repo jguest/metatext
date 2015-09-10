@@ -40,6 +40,26 @@ Metatext.parse :hello_word do |meta, content|
 end
 ```
 
+If you'd like to parse raw content yourself without configuring a directory and
+extension, you can simply pass in any string to `#parse` like so:
+
+```ruby
+raw = %{
+---
+name: John Guest
+---
+please parse me!
+}
+
+Metatext.parse raw do |meta, content|
+  puts meta.inspect # => #<OpenStruct name="John Guest">
+  puts content      # => "please parse me!"
+end
+```
+
+* there's no need to configure metatext in this case unless you'd like a text processor (see "with markdown")
+* as of the current version, raw strings will be parsed as erb if any `<% %>` delimiters are found.
+
 ### erb on demand
 
 If you set your extension to anything ending with `.erb`, e.g. `txt.erb`, the

@@ -9,4 +9,5 @@ Gem::Specification.new do |s|
   s.files       = ["lib/metatext.rb"]
   s.homepage    = 'http://rubygems.org/gems/metatext'
   s.license     = 'MIT'
+  s.required_ruby_version = '>= 2.0.0'
 end
