@@ -1,6 +1,6 @@
 ## metatext
 
-a lightweight jekyll-inspired metadata processor
+a lightweight jekyll-inspired metadata parser
 
 ### what it do
 
@@ -52,9 +52,7 @@ text will be processed as erb, also allowing you to pass in locals.
 foo: hello
 bar: world
 ---
-<% sounds.each do |sound| %>
-  <%= sound %>!
-<% end %>
+<% sounds.each do |sound| %><%= sound %>! <% end %>
 ```
 
 and the ruby
@@ -66,7 +64,7 @@ Metatext.configure \
 
 Metatext.parse :hello_word, sounds: ["bleep", "bloop"] do |meta, content|
   puts meta.inspect # => #<OpenStruct foo="hello", bar="world">
-  puts content      # => "hello world"
+  puts content      # => "bleep! bloop!"
 end
 ```
 
@@ -76,10 +74,10 @@ If you'd like to process the text as markdown as well, a la Jekyll, just add it 
 `#configure` like so:
 
 ```ruby
-Metatext.configure(
+Metatext.configure \
   dir: File.expand_path("examples", __FILE__),
   ext: 'md.erb',
-  processor: Redcarpet::Markdown.new(Redcarpet::Render::HTML))
+  processor: Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 ```
 
 Note: any text processor will work **as long as it implements a `render` method**.
